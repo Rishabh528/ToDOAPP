@@ -3,21 +3,24 @@ window.onload = function (){
   let add = document.getElementById('add');
 
   function addTask (){
-    let tasklist = document.getElementById('tasklist');
+    let tasklist = document.getElementById('tasklist');   //ul task list
     let delbtn = document.createElement('button');
     let upbtn = document.createElement('button');
     let downbtn = document.createElement('button');
 
-    let task = document.createElement('li');
+    let task = document.createElement('li'); // li tag
     // console.log(typeof item.value);
     if(item.value!=''){
-      task.innerText = item.value;
+      
       delbtn.innerText = 'DELETE';
       upbtn.innerText = 'UP';
       downbtn.innerText = 'DOWN';
       task.appendChild(delbtn);
       task.appendChild(upbtn);
       task.appendChild(downbtn);
+      let spantask = document.createElement('span');  // actual task contained in span
+      spantask.innerText = item.value;
+      task.appendChild(spantask);
       tasklist.appendChild(task);
     }
 
@@ -28,22 +31,19 @@ window.onload = function (){
     upbtn.onclick = function (event){
 
       let currentNode = event.target.parentElement;
-      let previousNode = currentNode.previousSibling;
+      let previousNode = currentNode.previousElementSibling;
       
-      let temp = currentNode.parentElement.insertBefore(currentNode,previousNode);
-
-      // currentNode.remove();
-      // console.log(previousNode);
+      currentNode.parentElement.insertBefore(currentNode,previousNode);
     }
 
     downbtn.onclick = function (event){
 
       let currentNode = event.target.parentElement;
-      let nextNode = currentNode.nextSibling;
+      let nextNode = currentNode.nextElementSibling;
 
-      if(nextNode.nextSibling != null){
-      let temp = currentNode.parentElement.insertBefore(currentNode,nextNode.nextSibling);
-      }
+      
+      currentNode.parentElement.insertBefore(nextNode,currentNode);
+     
     }
   }
 
